@@ -1,0 +1,13 @@
+{
+  "namespace" : "com.tss",
+  "type" : "record",
+  "name" : "News",
+  "fields" : [
+    {"name":"id","type":"int"},
+    {"name":"publishedDate","type":"long"},
+    {"name":"newsTitle","type":"string"},
+    {"name":"newsDescription","type":"string"},
+    {"name":"source","type":"string"},
+    {"name":"url","type":"string"}
+  ]
+}

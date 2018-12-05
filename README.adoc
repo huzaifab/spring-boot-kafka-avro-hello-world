@@ -1,0 +1,50 @@
+#Spring Boot Kafka Avro Hello World
+
+This repo includes Spring Boot applications to demonstrate Schema Evolution using Spring Cloud Stream. 
+
+- news-message-producer
+- news-message-consumer
+are included in this project. 
+
+This example in particular uses the Confluent Schema Registry server.
+
+Requirement
+- Java 1.8
+- Maven (latest version is good)
+- Kafka (zookeeper, kafka-server and schema-registry - latest version is good) 
+
+Assumptions
+- There are a lot of online literature on Schema Evolution, so we are going to skip defining them here. For this demonstration, however, we will simply assume there one producer producing News Event with payload schema. A consumer that consumes same schema payload version.
+
+How to compile?
+- > PATH-TO-PROJECT [spring-boot-kafka-avro-hello-world] > mvn clean install
+ - it must clean build both application properly
+	- news-message-producer
+	- news-message-consumer
+
+How to run this Project?
+Make sure you are in the directory confluent-4.1.1
+- Start zookeeper Server [bin\windows\zookeeper-server-start.bat confluent-4.1.1\etc\kafka\zookeeper.properties]
+- Start kafka-server [confluent-4.1.1\bin\windows\kafka-server-start.bat confluent-4.1.1\etc\kafka\server.properties]
+- Start schema-registry [confluent-4.1.1\bin\windows\schema-registry-start.bat confluent-4.1.1\etc\schema-registry\schema-registry.properties]
+
+-- once all	three thing are up means now you can start consumer producer application using below command 
+- > PATH-TO-PROJECT [spring-boot-kafka-avro-hello-world]>
+
+>java -jar news-message-producer\target\news-message-producer-1.0-SNAPSHOT.jar
+	- this news producer application will default come up on port 10000
+
+>java -jar news-message-consumer\target\news-message-consumer-1.0-SNAPSHOT.jar
+	- this news consumer application will default come up on port 10001
+
+** Now all application is up and you just need to produce News Events to send it to 'news' topic, which will be consumed by consumer application	**
+
+
+- From Browser or using Postman Client request url http://localhost:10000/produceNews
+	- It will show output as 'Produced News and Sent to News Channel'
+	- Once you get this message that means your message has been produced by producer application and it has been sent on 'news' topic and it will then be consumed by consumer application
+		
+		
+** Now check the console logs of your producer and consumer application **
+
+** You Are All Set **

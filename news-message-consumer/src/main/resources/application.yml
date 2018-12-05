@@ -1,0 +1,23 @@
+spring:
+  cloud:
+    stream:
+      schema-registry-client:
+        endpoint: http://localhost:8081
+      bindings:
+        news:
+          contentType: application/*+avro
+      schema:
+        avro:
+          schema-locations:
+            - classpath:avro/news.avsc
+      kafka:
+        binder:
+          consumer-properties:
+            specific.avro.reader: true
+            key.deserializer: org.apache.kafka.common.serialization.StringDeserializer
+            value.deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
+            schema.registry.url: http://localhost:8081
+          brokers:
+            - http://localhost:9092
+
+server.port: 10001
